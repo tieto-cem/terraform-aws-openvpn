@@ -1,0 +1,14 @@
+---
+# forward openvpn traffic
+
+- name: Enable packet forwarding for IPv4
+  template:
+    src: sysctl.conf.j2
+    dest: /etc/sysctl.conf
+  notify: reload sysctl
+
+- name: Masquerade client connections
+  template:
+    src: rc.local.j2
+    dest: /etc/rc.local
+  notify: start masquerade

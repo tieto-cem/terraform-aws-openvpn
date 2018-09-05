@@ -1,0 +1,43 @@
+# OpenVPN server config file
+
+port 1194
+proto udp
+dev tun
+keepalive 10 120
+comp-lzo
+push "route {{ LocalNetwork }}"
+
+# Keys and certificates.
+ca   /etc/openvpn/ca.crt
+key  /etc/openvpn/{{ ServerName }}.key # This file should be kept secret.
+cert /etc/openvpn/{{ ServerName }}.crt
+dh   /etc/openvpn/dh2048.pem
+
+{% if RedrirectTraffic == true %}
+# Redirect all traffic trough VPN server
+push "redirect-gateway def1 bypass-dhcp"
+{% endif %}
+
+# Certificate revocation list
+#crl-verify crl.pem
+
+ifconfig-pool-persist /etc/openvpn/ipp.txt
+
+server 10.8.0.0 255.255.255.0
+
+user nobody
+group nogroup
+
+# avoid accessing certain resources on restart
+persist-key
+persist-tun
+
+# current client connections
+status /etc/openvpn/openvpn-status.log
+
+# logging settings.
+log-append  /var/log/openvpn.log
+verb 1  # don't spam the log with messages.
+mute 10  # suppress identical messages > 10 occurances.
+
+script-security 2

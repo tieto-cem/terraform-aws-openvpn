@@ -1,0 +1,11 @@
+---
+# Handler to handle openvpn notifications. Handlers are called by other plays.
+
+- name: restart openvpn
+  systemd: name=openvpn@server state=restarted
+
+- name: reload sysctl
+  shell: sysctl -p /etc/sysctl.conf
+
+- name: start masquerade
+  shell: /bin/sh /etc/rc.local

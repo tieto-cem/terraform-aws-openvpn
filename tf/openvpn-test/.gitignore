@@ -1,0 +1,7 @@
+*.iml
+.terraform
+terraform.tfstate
+terraform.tfstate.backup
+
+# JetBrains Idea
+.idea/

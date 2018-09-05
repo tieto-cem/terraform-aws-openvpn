@@ -1,0 +1,28 @@
+---
+# This playbook will install clients for openvpn
+
+- name: Create client certificate
+  shell: . ./vars && ./pkitool --batch {{ item }}
+  args:
+    chdir: /etc/openvpn/easy-rsa
+    creates: keys/{{ item }}.csr
+  with_items: "{{ VpnClients }}"
+
+- name: Create client configuration files
+  template:
+    src: client.conf.j2
+    dest: /etc/openvpn/easy-rsa/keys/{{ ServerName }}-{{ item }}.conf
+    mode: 0644
+  with_items: "{{ VpnClients }}"
+
+- name: Create tar for client configuration
+  archive:
+    path:
+      - /etc/openvpn/easy-rsa/keys/{{ ServerName }}-{{ item }}.conf
+      - /etc/openvpn/easy-rsa/keys/{{ item }}.key
+      - /etc/openvpn/easy-rsa/keys/{{ item }}.crt
+      - /etc/openvpn/easy-rsa/keys/ca.crt
+    dest: /etc/openvpn/easy-rsa/keys/{{ item }}.tar.gz
+    format: gz
+    mode: 0600
+  with_items: "{{ VpnClients }}"

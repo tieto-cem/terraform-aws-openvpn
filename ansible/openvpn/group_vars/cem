@@ -1,0 +1,22 @@
+---
+# This file contain OpenVPN specific variables
+
+# VPN Clients
+VpnClients:
+  - jarl
+  - timo
+
+# Server Name
+ServerName: cem-openvpn
+
+# Remote Host
+Remote: 52.210.119.61
+
+# Redirect all traffic trough the VPN server
+RedrirectTraffic: false
+
+# Local network
+LocalNetwork: 172.31.0.0 255.255.0.0
+
+# Network Interface
+NetworkInterface: eth0
