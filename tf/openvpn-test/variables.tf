@@ -5,7 +5,7 @@ variable "region" {
 variable "amis" {
   type    = "map"
   default = {
-    "eu-west-1" = "ami-8d3455f4"
+    "eu-west-1" = "ami-0773391ae604c49a4"
   }
 }
 

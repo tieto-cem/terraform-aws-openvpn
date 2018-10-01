@@ -1,19 +1,13 @@
 client
-;dev tap
 dev tun
-;proto tcp
 proto udp
-remote {{ Remote }} 1194
-;remote my-server-2 1194
-;remote-random
+remote {{ RemoteHost.stdout }} 1194
 resolv-retry infinite
 nobind
 persist-key
 persist-tun
 remote-cert-tls server
-;tls-auth ta.key 1
-;cipher x
-comp-lzo
+compress lz4
 verb 3
 ;mute 20
 ca ca.crt

@@ -1,6 +1,16 @@
 ---
 # This playbook will be run on openvpn nodes.
 
+- name: Get gpg key for OpenVPN repository
+  apt_key:
+    url: https://swupdate.openvpn.net/repos/repo-public.gpg
+    state: present
+
+- name: Add OpenVPN repository into sources list
+  apt_repository:
+    repo: deb http://build.openvpn.net/debian/openvpn/release/2.4 xenial main
+    state: present
+
 - name: Install OpenVPN
   apt: name=openvpn state=present update_cache=yes
   tags: vpn

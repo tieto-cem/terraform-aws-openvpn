@@ -4,7 +4,7 @@ port 1194
 proto udp
 dev tun
 keepalive 10 120
-comp-lzo
+compress lz4
 push "route {{ LocalNetwork }}"
 
 # Keys and certificates.

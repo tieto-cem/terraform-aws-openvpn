@@ -9,9 +9,6 @@ VpnClients:
 # Server Name
 ServerName: cem-openvpn
 
-# Remote Host
-Remote: 52.210.119.61
-
 # Redirect all traffic trough the VPN server
 RedrirectTraffic: false
 

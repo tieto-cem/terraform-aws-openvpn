@@ -8,6 +8,11 @@
     creates: keys/{{ item }}.csr
   with_items: "{{ VpnClients }}"
 
+- name: Get public IP address for OpenVPN host
+  command: "dig +short myip.opendns.com @resolver1.opendns.com"
+  changed_when: false
+  register: "RemoteHost"
+
 - name: Create client configuration files
   template:
     src: client.conf.j2

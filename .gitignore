@@ -1,0 +1,16 @@
+# Terrafrom
+*.iml
+.terraform
+terraform.tfstate
+terraform.tfstate.backup
+
+# Ansible group vars, inventories and other
+ansible/openvpn/group_vars/*
+!ansible/openvpn/group_vars/example
+!ansible/openvpn/group_vars/packer
+ansible/openvpn/inventories/*
+!ansible/openvpn/inventories/example/
+main.retry
+
+# JetBrains Idea
+.idea/
