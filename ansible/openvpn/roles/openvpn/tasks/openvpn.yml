@@ -54,6 +54,7 @@
     dest: /etc/openvpn/
     owner: root
     group: root
+    mode: 0600
   with_items:
     - "{{ ServerName }}.crt"
     - "{{ ServerName }}.key"
