@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 module "openvpn" {
-  source        = "../openvpn"
+  source        = "../../"
   ami           = "${lookup(var.amis, var.region)}"
   region        = "${var.region}}"
   instance_type = "${var.instance_type}"

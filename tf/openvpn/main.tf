@@ -27,6 +27,7 @@ resource "aws_instance" "openvpn" {
 }
 
 resource "aws_eip" "openvpn_ip" {
-  instance = "${aws_instance.openvpn.id}"
-  vpc      = true
+  instance   = "${aws_instance.openvpn.id}"
+  vpc        = true
+  depends_on = ["aws_instance.openvpn"]
 }

@@ -3,6 +3,7 @@
 .terraform
 terraform.tfstate
 terraform.tfstate.backup
+.terraform.tfstate.lock*
 
 # Ansible group vars, inventories and other
 ansible/openvpn/group_vars/*
