@@ -13,5 +13,8 @@ ansible/openvpn/inventories/*
 !ansible/openvpn/inventories/example/
 main.retry
 
+# Don't commit any user keys
+*.tar.gz
+
 # JetBrains Idea
 .idea/
