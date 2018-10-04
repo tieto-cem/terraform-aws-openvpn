@@ -22,7 +22,7 @@ terraform apply
 
 The example will output `instance_id` and `public_ip`. The instance can now be accessed with the IP address trough SSH.
 
-### Install OpenVPN
+### Install OpenVPN on the Server
 
 Ansible automatically install OpenVPN with all dependencies and configurations.
 
@@ -89,3 +89,59 @@ Run the following command to obtain client keys
 ```bash
 ./obtain-keys.sh -i /location/to/private/ssh_key.pem -s ubuntu@IP_ADDRESS -c username
 ```
+
+### Client installation of OpenVPN
+
+#### Mac OS Client
+
+Install stable version of [Tunnelblick](https://tunnelblick.net/downloads.html).
+
+Extract your key file (your-name.tar.gz) into an empty directory e.g. vpn. Run the commands in a terminal window
+
+```bash
+mkdir ~/Documents/vpn && cd ~/Documents/vpn
+tar zxf /location/to/your-name.tar.gz
+```
+
+Open Finder and locate the folder `~/Documents/vpn`.
+
+Double click on the the conf file e.g. cem-openvpn-your-name.conf and choose to install for "Only Me".
+
+Click on the small Tunnelblick icon in the top menu bar and choose "Connect cem-openvpn-your-name".
+
+#### Linux Client (Ubuntu 16.04 example)
+
+Install OpenVPN
+
+```bash
+wget -O - https://swupdate.openvpn.net/repos/repo-public.gpg | sudo apt-key add -
+echo "deb http://build.openvpn.net/debian/openvpn/release/2.4 xenial main" | sudo tee /etc/apt/sources.list.d/openvpn-aptrepo.list
+sudo apt update && sudo apt install openvpn
+```
+
+Extract your key file (your-name.tar.gz) into `/etc/openvpn`.
+
+```bash
+cd /etc/openvpn/
+sudo tar zxf /location/to/your-name.tar.gz
+```
+
+Start OpenVPN client
+
+```bash
+sudo systemctl status openvpn@cem-openvpn-your-name
+```
+
+Stop OpenVPN client
+
+```bash
+sudo systemctl stop openvpn@cem-openvpn-your-name
+```
+
+#### Windows Client
+
+Install latest version of [OpenVPN](https://openvpn.net/index.php/download/community-downloads.html) for Windows.
+
+Extract Extract your key file (your-name.tar.gz) into `C:\Program Files\OpenVPN\config`. WinZip can be used for extracting .tar.gz files.
+
+Right click on the small OpenVPN icon in the windows taskbar on the right hand bottom corner. Select connect.
