@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Output how to use the script
+# Describe obtain-keys.sh
 function help {
     printf "
 This script will obtain OpenVPN keys for a client
@@ -28,6 +28,6 @@ if [ -z ${SSH_KEY} ] || [ -z ${LOGIN} ] || [ -z ${VPN_CLIENT} ]; then
     exit
 fi
 
-ssh -i ${SSH_KEY} ${LOGIN} "sudo cp /etc/openvpn/easy-rsa/keys/${VPN_CLIENT}.tar.gz . && sudo chmod 666 ${VPN_CLIENT}.tar.gz"
+ssh -i ${SSH_KEY} ${LOGIN} "sudo cp /etc/openvpn/easy-rsa/keys/${VPN_CLIENT}.tar.gz . && sudo chown ${LOGIN%@*} ${VPN_CLIENT}.tar.gz"
 scp -i ${SSH_KEY} ${LOGIN}:${VPN_CLIENT}.tar.gz .
 ssh -i ${SSH_KEY} ${LOGIN} "rm ${VPN_CLIENT}.tar.gz"
