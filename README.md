@@ -6,7 +6,7 @@ OpenVPN module install and configure [OpenVPN](https://openvpn.net/) with help o
 
 ### Requirements
 
-The OpenVPN module requires that an AWS account has already been provisioned with at least one public subnet in a VPC. The following list of requirements also is need to install the OpenVPN module.
+The OpenVPN module requires that an AWS account has already been provisioned with at least one public subnet in a VPC. The following list of requirements is also need to install the OpenVPN module.
 
 - [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
 - [Terraform](https://www.terraform.io/downloads.html)
@@ -42,7 +42,7 @@ Copy the ansible [inventory example](ansible/openvpn/inventories/example/example
 cp ansible/openvpn/inventories/example/example-inventory ansible/openvpn/inventories/cem/cem-inventory
 ```
 
-Redefine the inventory, change the host group "example" to "cem" and use the use the IP address that was outputted from the terraform script.
+Redefine the inventory, change the host group "example" to "cem" and use the IP address that was outputted from the terraform script.
 
 ```bash
 [cem]
@@ -144,4 +144,4 @@ Install latest version of [OpenVPN](https://openvpn.net/index.php/download/commu
 
 Extract Extract your key file (your-name.tar.gz) into `C:\Program Files\OpenVPN\config`. WinZip can be used for extracting .tar.gz files.
 
-Right click on the small OpenVPN icon in the windows taskbar on the right hand bottom corner. Select connect.
+Right click on the small OpenVPN icon in the windows taskbar on the right hand bottom corner and select connect.
