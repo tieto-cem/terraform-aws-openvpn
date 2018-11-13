@@ -5,6 +5,7 @@ module "role" {
 module "sg" {
   source = "./modules/sg"
   cidr   = "${var.cidr}"
+  vpc_id = "${var.vpc_id}"
 }
 
 resource "aws_instance" "openvpn" {

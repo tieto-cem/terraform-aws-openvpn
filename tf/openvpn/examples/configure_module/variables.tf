@@ -17,6 +17,10 @@ variable "key_name" {
   default = "cem"
 }
 
+variable "vpc_id" {
+  description = "VPC id where to place the security group"
+}
+
 variable "subnet_id" {
   default = "subnet-68839330"
 }

@@ -1,6 +1,7 @@
 resource "aws_security_group" "openvpn" {
   name        = "openvpn"
   description = "Allow only 1194 publicly, ssh available with VPN access"
+  vpc_id      = "${var.vpc_id}"
 
   ingress {
     from_port   = 1194

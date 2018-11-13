@@ -15,6 +15,10 @@ variable "key_name" {
   description = ""
 }
 
+variable "vpc_id" {
+  description = "VPC id where to place the security group"
+}
+
 variable "subnet_id" {
   description = ""
 }

@@ -19,6 +19,7 @@ The Module takes the arguments below.
 | ami | EC2 AMI to use. Note that it has to be Ubuntu 16.04 |
 | instance_type | EC2 instance type (t2.nano should be enough in most cases) |
 | key_name | SSH key to use. Note that the key pair need to exist |
+| vpc_id | ID of the VPC to use. The VPC has to exist |
 | subnet_id | Public subnet for the EC2 instance. The subnet has to exist |
 | CIDR | IP range that can access any port of the EC2 instance. This can be used in case the instance is used for NAT |
 | source_dest_check | Source destination check. AWS will not forward traffic trough the instance if this on is turned on |

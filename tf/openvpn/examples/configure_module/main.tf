@@ -8,6 +8,7 @@ module "openvpn" {
   region        = "${var.region}}"
   instance_type = "${var.instance_type}"
   key_name      = "${var.key_name}"
+  vpc_id        = "${var.vpc_id}"
   subnet_id     = "${var.subnet_id}"
   cidr          = "${var.CIDR}"
   user_data     = "${var.user_data}"
