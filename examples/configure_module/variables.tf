@@ -25,7 +25,7 @@ variable "subnet_id" {
   default = "subnet-68839330"
 }
 
-variable "CIDR" {
+variable "cidr" {
   default = "172.31.0.0/16"
 }
 

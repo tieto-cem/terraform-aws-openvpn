@@ -1,147 +1,56 @@
-# OpenVPN Module
+# OpenVPN Terraform Module
 
-OpenVPN module install and configure [OpenVPN](https://openvpn.net/) with help of [Terraform](https://www.terraform.io/) and [Ansible](https://www.ansible.com/). The OpenVPN terraform module currently support only [AWS](https://aws.amazon.com/) but the Ansible playbook can be used for installing OpenVPN on an Ubunu machine from any infra provider.
+OpenVPN module provision one EC2 instance in a public subnet of your VPC. The instance itself should be used for VPN tunneling. There is an Ansible Playbook example in the Ansible [openvpn-server-role](https://github.com/tieto-cem/openvpn-server-role) repository.
 
-## Getting started with OpenVPN Module
+## Module
 
-### Requirements
+The module will create one EC2 instance and attach an Elastic IP to the instance. Additionally it will create one security group and one IAM role for the instance.
 
-The OpenVPN module requires that an AWS account has already been provisioned with at least one public subnet in a VPC. The following list of requirements is also need to install the OpenVPN module.
+Have a look into [main.tf](https://github.com/tieto-cem/terraform-aws-openvpn/blob/master/tf/openvpn/examples/configure_module/main.tf)
 
-- [Ansible](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html)
-- [Terraform](https://www.terraform.io/downloads.html)
+### Variables
 
-### Provision the instance
+The Module takes the arguments below.
 
-There is an [example](tf/openvpn/examples/configure_module) on how to configure the module. Follow the example, redefine the variables and run
+| Variable | Description |
+| --- | --- |
+| source | module location |
+| region | The AWS region for the OpenVPN EC2 instance |
+| ami | EC2 AMI to use. Note that it has to be Ubuntu 16.04 |
+| instance_type | EC2 instance type (t2.nano should be enough in most cases) |
+| key_name | SSH key to use. Note that the key pair need to exist |
+| vpc_id | ID of the VPC to use. The VPC has to exist |
+| subnet_id | Public subnet for the EC2 instance. The subnet has to exist |
+| cidr | IP range that can access any port of the EC2 instance. This can be used in case the instance is used for NAT |
+| source_dest_check | Source destination check. AWS will not forward traffic trough the instance if this on is turned on |
+| user_data | commands to execute during launch of the EC2 instance |
+| tags | Instance Tags |
+| volume_tags | Tags fort the EBS volume |
+
+Have a look into the example files, [variables.tf](https://github.com/tieto-cem/terraform-aws-openvpn/blob/master/tf/openvpn/examples/configure_module/variables.tf) and [main.tf](https://github.com/tieto-cem/terraform-aws-openvpn/blob/master/tf/openvpn/examples/configure_module/main.tf).
+
+### Output Variables
+
+The OpenVPN module exports the following variables
+
+| Variable | Description |
+| --- | --- |
+| public_ip | The elastic ip associated with the EC2 instance |
+| instance_id | The ID of the EC2 instance |
+
+## Provision OpenVPN
+
+The OpenVPN module can be used with [this example](https://github.com/tieto-cem/terraform-aws-openvpn/tree/master/tf/openvpn/examples/configure_module). Note that you need to redefine [variables.tf](https://github.com/tieto-cem/terraform-aws-openvpn/blob/master/tf/openvpn/examples/configure_module/variables.tf) to work with your AWS setup.
+
+Run the following commands
 
 ```bash
 terraform init
 terraform apply
 ```
 
-The example will output `instance_id` and `public_ip`. The instance can now be accessed with the IP address trough SSH.
-
-### Install OpenVPN on the Server
-
-Ansible automatically install OpenVPN with all dependencies and configurations.
-
-#### Configure Ansible
-
-The Ansible playbook need to be configured before it's possible to install OpenVPN.
-
-Create a new inventory, cem.
+You can teardown the setup with the following command
 
 ```bash
-mkdir ansible/openvpn/inventories/cem
+terraform destroy
 ```
-
-Copy the ansible [inventory example](ansible/openvpn/inventories/example/example-inventory)
-
-```bash
-cp ansible/openvpn/inventories/example/example-inventory ansible/openvpn/inventories/cem/cem-inventory
-```
-
-Redefine the inventory, change the host group "example" to "cem" and use the IP address that was outputted from the terraform script.
-
-```bash
-[cem]
-18.203.25.235
-
-[all:vars]
-ansible_connection=ssh 
-ansible_ssh_private_key_file=~/aws/cem/cem.pem
-ansible_ssh_user=ubuntu
-ansible_python_interpreter=/usr/bin/python3.5
-```
-
-Copy the ansible [group_vars example](ansible/openvpn/group_vars/example)
-
-```bash
-cp ansible/openvpn/group_vars/example ansible/openvpn/group_vars/cem
-```
-
-Redefine the group variables in the group_vars file, cem
-
-| Variable | Description |
-| --- | --- |
-| VpnClients | List of VPN keys that should be generated |
-| ServerName | Name of the server, will be part of keys etc |
-| RedrirectTraffic | If `true` all traffic will get routed trough the VPN server. Normally this can be `false` |
-| LocalNetwork | Clients will route all traffic trough the VPN server within this IP range |
-| NetworkInterface | Network interface for the public IP |
-
-#### Run ansible
-
-Run the playbook in order to install OpenVPN and create user keys
-
-```bash
-cd ansible/openvpn
-ANSIBLE_HOST_KEY_CHECKING=false ansible-playbook install-openvpn.yml -i inventories/cem
-```
-
-#### Obtain client keys
-
-The client keys exist on the server and can only be obtain with sudo rights.
-
-Run the following command to obtain client keys
-
-```bash
-./obtain-keys.sh -i /location/to/private/ssh_key.pem -s ubuntu@IP_ADDRESS -c username
-```
-
-### Client installation of OpenVPN
-
-#### Mac OS Client
-
-Install stable version of [Tunnelblick](https://tunnelblick.net/downloads.html).
-
-Extract your key file (your-name.tar.gz) into an empty directory e.g. vpn. Run the commands in a terminal window
-
-```bash
-mkdir ~/Documents/vpn && cd ~/Documents/vpn
-tar zxf /location/to/your-name.tar.gz
-```
-
-Open Finder and locate the folder `~/Documents/vpn`.
-
-Double click on the the conf file e.g. cem-openvpn-your-name.conf and choose to install for "Only Me".
-
-Click on the small Tunnelblick icon in the top menu bar and choose "Connect cem-openvpn-your-name".
-
-#### Linux Client (Ubuntu 16.04 example)
-
-Install OpenVPN
-
-```bash
-wget -O - https://swupdate.openvpn.net/repos/repo-public.gpg | sudo apt-key add -
-echo "deb http://build.openvpn.net/debian/openvpn/release/2.4 xenial main" | sudo tee /etc/apt/sources.list.d/openvpn-aptrepo.list
-sudo apt update && sudo apt install openvpn
-```
-
-Extract your key file (your-name.tar.gz) into `/etc/openvpn`.
-
-```bash
-cd /etc/openvpn/
-sudo tar zxf /location/to/your-name.tar.gz
-```
-
-Start OpenVPN client
-
-```bash
-sudo systemctl status openvpn@cem-openvpn-your-name
-```
-
-Stop OpenVPN client
-
-```bash
-sudo systemctl stop openvpn@cem-openvpn-your-name
-```
-
-#### Windows Client
-
-Install latest version of [OpenVPN](https://openvpn.net/index.php/download/community-downloads.html) for Windows.
-
-Extract Extract your key file (your-name.tar.gz) into `C:\Program Files\OpenVPN\config`. WinZip can be used for extracting .tar.gz files.
-
-Right click on the small OpenVPN icon in the windows taskbar on the right hand bottom corner and select connect.

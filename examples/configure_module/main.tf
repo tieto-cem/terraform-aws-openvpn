@@ -10,7 +10,7 @@ module "openvpn" {
   key_name      = "${var.key_name}"
   vpc_id        = "${var.vpc_id}"
   subnet_id     = "${var.subnet_id}"
-  cidr          = "${var.CIDR}"
+  cidr          = "${var.cidr}"
   user_data     = "${var.user_data}"
   tags          = "${var.tags}"
   volume_tags   = "${var.volume_tags}"
