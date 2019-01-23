@@ -6,7 +6,7 @@ OpenVPN module provision one EC2 instance in a public subnet of your VPC. The in
 
 The module will create one EC2 instance and attach an Elastic IP to the instance. Additionally it will create one security group and one IAM role for the instance.
 
-Have a look into [main.tf](https://github.com/tieto-cem/terraform-aws-openvpn/blob/master/tf/openvpn/examples/configure_module/main.tf)
+Have a look into [main.tf](https://github.com/tieto-cem/terraform-aws-openvpn/blob/master/examples/configure_module/main.tf)
 
 ### Variables
 
@@ -27,7 +27,7 @@ The Module takes the arguments below.
 | tags | Instance Tags |
 | volume_tags | Tags fort the EBS volume |
 
-Have a look into the example files, [variables.tf](https://github.com/tieto-cem/terraform-aws-openvpn/blob/master/tf/openvpn/examples/configure_module/variables.tf) and [main.tf](https://github.com/tieto-cem/terraform-aws-openvpn/blob/master/tf/openvpn/examples/configure_module/main.tf).
+Have a look into the example files, [variables.tf](https://github.com/tieto-cem/terraform-aws-openvpn/blob/master/examples/configure_module/variables.tf) and [main.tf](https://github.com/tieto-cem/terraform-aws-openvpn/blob/master/examples/configure_module/main.tf).
 
 ### Output Variables
 
@@ -40,7 +40,7 @@ The OpenVPN module exports the following variables
 
 ## Provision OpenVPN
 
-The OpenVPN module can be used with [this example](https://github.com/tieto-cem/terraform-aws-openvpn/tree/master/tf/openvpn/examples/configure_module). Note that you need to redefine [variables.tf](https://github.com/tieto-cem/terraform-aws-openvpn/blob/master/tf/openvpn/examples/configure_module/variables.tf) to work with your AWS setup.
+The OpenVPN module can be used with [this example](https://github.com/tieto-cem/terraform-aws-openvpn/blob/master/examples/configure_module). Note that you need to redefine [variables.tf](https://github.com/tieto-cem/terraform-aws-openvpn/blob/master/examples/configure_module/variables.tf) to work with your AWS setup.
 
 Run the following commands
 
