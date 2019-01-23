@@ -12,8 +12,9 @@ ServerName: cem-openvpn
 # Redirect all traffic trough the VPN server
 RedrirectTraffic: false
 
-# Local network
-LocalNetwork: 172.31.0.0 255.255.0.0
+# Local networks
+LocalNetworks:
+  - 172.31.0.0 255.255.0.0
 
 # Network Interface
 NetworkInterface: eth0

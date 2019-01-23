@@ -5,7 +5,9 @@ proto udp
 dev tun
 keepalive 10 120
 compress lz4
-push "route {{ LocalNetwork }}"
+{% for localNetwork in LocalNetworks %}
+push "route {{ localNetwork }}"
+{% endfor %}
 
 # Keys and certificates.
 ca   /etc/openvpn/ca.crt
