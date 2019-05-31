@@ -8,7 +8,7 @@ The module will create one EC2 instance and attach an Elastic IP to the instance
 
 Have a look into [main.tf](https://github.com/tieto-cem/terraform-aws-openvpn/blob/master/examples/configure_module/main.tf)
 
-Note that this module is written for terraform client ver 0.12 or later. Use release 1.0.0 for prior terrafomr versions.
+Note that this module is written for terraform client ver 0.12 or later. Use release 1.0.0 for prior terraform versions.
 
 ### Variables
 
