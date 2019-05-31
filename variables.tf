@@ -37,11 +37,11 @@ variable "user_data" {
 }
 
 variable "tags" {
-  type        = "map"
+  type        = map(string)
   description = ""
 }
 
 variable "volume_tags" {
-  type        = "map"
+  type        = map(string)
   description = ""
 }

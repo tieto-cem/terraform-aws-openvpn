@@ -3,7 +3,7 @@ variable "region" {
 }
 
 variable "amis" {
-  type    = "map"
+  type = map(string)
   default = {
     "eu-west-1" = "ami-0773391ae604c49a4"
   }
@@ -38,14 +38,14 @@ variable "user_data" {
 }
 
 variable "tags" {
-  type    = "map"
+  type = map(string)
   default = {
     Name = "OpenVPN"
   }
 }
 
 variable "volume_tags" {
-  type    = "map"
+  type = map(string)
   default = {
     Name = "OpenVPN"
   }
