@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 module "openvpn" {
-  source        = "github.com/tieto-cem/terraform-aws-openvpn?ref=tf-0.12"
+  source        = "github.com/tieto-cem/terraform-aws-openvpn?ref=v1.2.0" # update to the newset release tag
   ami           = var.amis[var.region]
   region        = var.region
   instance_type = var.instance_type
