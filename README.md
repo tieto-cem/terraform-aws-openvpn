@@ -37,8 +37,14 @@ The OpenVPN module exports the following variables
 
 | Variable | Description |
 | --- | --- |
-| public_ip | The elastic ip associated with the EC2 instance |
+| public_ip | The elastic IP address associated with the EC2 instance |
+| private_ip | Contains the private IP address |
 | instance_id | The ID of the EC2 instance |
+| eip_id | Contains the EIP allocation ID |
+| instance_arn | The ARN of the instance |
+| iam_instance_profile | The instance profile's ID |
+| iam_role | The name of the role |
+| sg_id | The security's ID |
 
 ## Provision OpenVPN
 
