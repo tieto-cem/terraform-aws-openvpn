@@ -1,9 +1,11 @@
 module "role" {
   source = "./modules/role"
+  name   = var.name
 }
 
 module "sg" {
   source = "./modules/sg"
+  name   = var.name
   cidr   = var.cidr
   vpc_id = var.vpc_id
 }

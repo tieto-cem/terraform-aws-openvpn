@@ -4,6 +4,7 @@ provider "aws" {
 
 module "openvpn" {
   source        = "github.com/tieto-cem/terraform-aws-openvpn?ref=v1.2.0" # update to the newset release tag
+  name          = var.name
   ami           = var.amis[var.region]
   region        = var.region
   instance_type = var.instance_type

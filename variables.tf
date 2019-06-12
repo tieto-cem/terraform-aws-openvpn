@@ -1,5 +1,10 @@
+variable "name" {
+  description = "Unique name of the module"
+  default     = "openvpn"
+}
+
 variable "region" {
-  description = "Regin to place openvpn instance"
+  description = "Region to place openvpn instance"
   default     = "eu-west-1"
 }
 
