@@ -1,3 +1,7 @@
+variable "name" {
+  description = "Security group name"
+}
+
 variable "cidr" {
   description = "Ingress IP range"
 }

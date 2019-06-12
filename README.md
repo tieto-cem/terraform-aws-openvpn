@@ -17,9 +17,10 @@ The Module takes the arguments below.
 | Variable | Description |
 | --- | --- |
 | source | module location |
+| name | Unique name for the module |
 | region | The AWS region for the OpenVPN EC2 instance |
 | ami | EC2 AMI to use. Note that it has to be Ubuntu 16.04 |
-| instance_type | EC2 instance type (t2.nano should be enough in most cases) |
+| instance_type | EC2 instance type (t3a.nano should be enough in most cases) |
 | key_name | SSH key to use. Note that the key pair need to exist |
 | vpc_id | ID of the VPC to use. The VPC has to exist |
 | subnet_id | Public subnet for the EC2 instance. The subnet has to exist |

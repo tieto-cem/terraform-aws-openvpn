@@ -1,5 +1,5 @@
 resource "aws_security_group" "openvpn" {
-  name        = "openvpn"
+  name        = var.name
   description = "Allow only 1194 publicly, ssh available with VPN access"
   vpc_id      = var.vpc_id
 

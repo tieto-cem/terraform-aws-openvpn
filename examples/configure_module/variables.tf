@@ -1,3 +1,7 @@
+variable "name" {
+  default = "openvpn"
+}
+
 variable "region" {
   default = "eu-west-1"
 }
@@ -10,7 +14,7 @@ variable "amis" {
 }
 
 variable "instance_type" {
-  default = "t2.nano"
+  default = "t3a.nano"
 }
 
 variable "key_name" {
