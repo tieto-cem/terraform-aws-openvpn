@@ -5,7 +5,7 @@ resource "aws_iam_role" "openvpn_role" {
 
 resource "aws_iam_instance_profile" "openvpn_instance_profile" {
   name = "${var.name}_instance_profile"
-  role = "openvpn_role"
+  role = aws_iam_role.openvpn_role.id
 }
 
 resource "aws_iam_role_policy" "openvpn_role_policy" {
