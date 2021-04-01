@@ -8,8 +8,7 @@ resource "aws_iam_instance_profile" "openvpn_instance_profile" {
   role = aws_iam_role.openvpn_role.id
 }
 
-resource "aws_iam_role_policy" "openvpn_role_policy" {
-  name   = "${var.name}_role_policy"
-  role   = aws_iam_role.openvpn_role.id
-  policy = file("${path.module}/role_policy.json")
+resource "aws_iam_role_policy_attachment" "ssm_managed_instance_core" {
+  role       = aws_iam_role.openvpn_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
 }

@@ -4,11 +4,11 @@ OpenVPN module provision one EC2 instance in a public subnet of your VPC. The in
 
 ## Module
 
-The module will create one EC2 instance and attach an Elastic IP to the instance. Additionally it will create one security group and one IAM role for the instance.
+The module will create one EC2 instance and attach an Elastic IP to the instance. Additionally it will create one security group and one IAM role with the AmazonSSMManagedInstanceCore policy attached to the IAM role for the instance.
 
 Have a look into [main.tf](https://github.com/tieto-cem/terraform-aws-openvpn/blob/master/examples/configure_module/main.tf)
 
-Note that this module is written for terraform client ver 0.12 or later. Use release 1.0.0 for prior terraform versions.
+Note that this module is written for terraform client ver 0.14 or later. Use release earlier releases for prior terraform versions.
 
 ### Variables
 
@@ -25,6 +25,9 @@ The Module takes the arguments below.
 | vpc_id | ID of the VPC to use. The VPC has to exist |
 | subnet_id | Public subnet for the EC2 instance. The subnet has to exist |
 | cidr | IP range that can access any port of the EC2 instance. This can be used in case the instance is used for NAT |
+| allow_nat | Can the instance be used for NAT |
+| allow_ssh_port | Should the SSH port be open |
+| ssh_cidr | Allowed network range for SSH |
 | source_dest_check | Source destination check. AWS will not forward traffic trough the instance if this on is turned on |
 | user_data | commands to execute during launch of the EC2 instance |
 | tags | Instance Tags |

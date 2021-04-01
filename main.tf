@@ -5,9 +5,12 @@ module "role" {
 
 module "sg" {
   source = "./modules/sg"
-  name   = var.name
-  cidr   = var.cidr
-  vpc_id = var.vpc_id
+  name           = var.name
+  cidr           = var.cidr
+  vpc_id         = var.vpc_id
+  allow_nat      = var.allow_nat
+  allow_ssh_port = var.allow_ssh_port
+  ssh_cidr       = var.ssh_cidr
 }
 
 resource "aws_instance" "openvpn" {
